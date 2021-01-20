@@ -1,14 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center"/>
+    <data>
+        <variable
+            name="viewModel"
+            type="uz.jamshid.androidtest.ui.MainViewModel" />
+    </data>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:background="#dddddd"
+            android:src="@drawable/ic_baseline_image_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:gravity="bottom"
+            android:text="@{viewModel.estimate.company}"
+            android:textColor="@color/colorText"
+            app:layout_constraintBottom_toTopOf="@id/tvAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivLogo"
+            app:layout_constraintTop_toTopOf="@id/ivLogo" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:text="@{viewModel.estimate.address}"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintBottom_toBottomOf="@id/ivLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivLogo"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+        <TextView
+            android:id="@+id/tvDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="Est. Details"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="#E0E0E0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetails" />
+
+
+        <TextView
+            android:id="@+id/tvEstNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Est. Number"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toStartOf="@id/tvRevNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <TextView
+            android:id="@+id/tvEstCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/colorText"
+            android:text="@{Integer.toString(viewModel.estimate.number)}"
+            app:layout_constraintEnd_toStartOf="@id/tvRevCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEstNumber" />
+
+
+        <TextView
+            android:id="@+id/tvRevNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Rev Number"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvEstNumber"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <TextView
+            android:id="@+id/tvRevCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{Integer.toString(viewModel.estimate.revision_number)}"
+            android:textColor="@color/colorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvEstCount"
+            app:layout_constraintTop_toBottomOf="@id/tvRevNumber" />
+
+        <TextView
+            android:id="@+id/tvCreated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Created"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toStartOf="@id/tvCreatedBy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEstCount" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/colorText"
+            android:text="@{viewModel.estimate.created_date}"
+            app:layout_constraintEnd_toStartOf="@id/tvCreatedName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCreated" />
+
+
+        <TextView
+            android:id="@+id/tvCreatedBy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Created By"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvCreated"
+            app:layout_constraintTop_toBottomOf="@id/tvRevCount" />
+
+        <TextView
+            android:id="@+id/tvCreatedName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{viewModel.personCreatedBy.name}"
+            android:textColor="@color/colorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvDate"
+            app:layout_constraintTop_toBottomOf="@id/tvCreatedBy" />
+
+
+        <TextView
+            android:id="@+id/tvRequester"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Requester"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toStartOf="@id/tvContact"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDate" />
+
+        <TextView
+            android:id="@+id/tvRequesterName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/colorText"
+            android:text="@{viewModel.personRequestedBy.name}"
+            app:layout_constraintEnd_toStartOf="@id/tvContactName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRequester" />
+
+
+        <TextView
+            android:id="@+id/tvContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Contact"
+            android:textColor="@color/colorLightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvRequester"
+            app:layout_constraintTop_toBottomOf="@id/tvCreatedName" />
+
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{viewModel.personRequestedBy.name}"
+            android:textColor="@color/colorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvRequesterName"
+            app:layout_constraintTop_toBottomOf="@id/tvContact" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

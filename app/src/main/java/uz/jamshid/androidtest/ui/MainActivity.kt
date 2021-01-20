@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import uz.jamshid.androidtest.MyApplication
 import uz.jamshid.androidtest.R
 import uz.jamshid.androidtest.data.ViewModelFactory
+import uz.jamshid.androidtest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,18 +21,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        viewModel.personRequestedBy.observe(this, Observer {
-            Log.d(TAG, "Requested by: $it")
-        })
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewModel.personCreatedBy.observe(this, Observer {
-            Log.d(TAG, "Created by: $it")
-        })
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-        viewModel.personContact.observe(this, Observer {
-            Log.d(TAG, "Contact: $it")
+        viewModel.failureLiveData.observe(this, Observer {
+            Log.d(TAG, "Failure: ${it.message}")
         })
 
         viewModel.getPerson()

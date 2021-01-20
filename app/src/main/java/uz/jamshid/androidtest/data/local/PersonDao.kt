@@ -4,19 +4,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import io.reactivex.Flowable
 import uz.jamshid.androidtest.data.model.Person
 
 @Dao
 interface PersonDao {
 
     @Query("SELECT * FROM person WHERE id = :created_by")
-    suspend fun getPersonCreatedBy(created_by: String): Person
+    fun getPersonCreatedBy(created_by: String): Flowable<Person>
 
     @Query("SELECT * FROM person WHERE id = :requested_by")
-    suspend fun getPersonRequestedBy(requested_by: String): Person
+    fun getPersonRequestedBy(requested_by: String): Flowable<Person>
 
     @Query("SELECT * FROM person WHERE id = :contact")
-    suspend fun getPersonContact(contact: String): Person
+    fun getPersonContact(contact: String): Flowable<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(person: Person)
