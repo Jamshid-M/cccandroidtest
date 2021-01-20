@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "Contact: $it")
         })
 
+        viewModel.failureLiveData.observe(this, Observer {
+            Log.d(TAG, "Failure: $it")
+        })
+
         viewModel.getPerson()
     }
 
